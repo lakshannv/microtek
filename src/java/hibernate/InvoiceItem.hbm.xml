@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2021 4:50:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.InvoiceItem" table="invoice_item" catalog="microtek" optimistic-lock="version">
+        <composite-id name="id" class="hibernate.InvoiceItemId">
+            <key-property name="invoiceId" type="int">
+                <column name="invoice_id" />
+            </key-property>
+            <key-property name="stockId" type="int">
+                <column name="stock_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="invoice" class="hibernate.Invoice" update="false" insert="false" fetch="select">
+            <column name="invoice_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="stock" class="hibernate.Stock" update="false" insert="false" fetch="select">
+            <column name="stock_id" not-null="true" />
+        </many-to-one>
+        <property name="discount" type="java.lang.Double">
+            <column name="discount" precision="22" scale="0" />
+        </property>
+        <property name="qty" type="java.lang.Integer">
+            <column name="qty" />
+        </property>
+    </class>
+</hibernate-mapping>

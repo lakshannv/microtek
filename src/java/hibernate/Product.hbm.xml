@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2021 4:50:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.Product" table="product" catalog="microtek" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="brand" class="hibernate.Brand" fetch="select">
+            <column name="brand_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="category" class="hibernate.Category" fetch="select">
+            <column name="category_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="65535" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="65535" />
+        </property>
+        <set name="wishlists" table="wishlist" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="product_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Wishlist" />
+        </set>
+        <set name="productReviews" table="product_review" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="product_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ProductReview" />
+        </set>
+        <set name="productHasSpecs" table="product_has_spec" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="product_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ProductHasSpec" />
+        </set>
+        <set name="productImages" table="product_image" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="product_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ProductImage" />
+        </set>
+        <set name="stocks" table="stock" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="product_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Stock" />
+        </set>
+    </class>
+</hibernate-mapping>

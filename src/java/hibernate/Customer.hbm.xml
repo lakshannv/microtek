@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2021 4:50:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.Customer" table="customer" catalog="microtek" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="65535" />
+        </property>
+        <property name="fname" type="string">
+            <column name="fname" length="65535" />
+        </property>
+        <property name="lname" type="string">
+            <column name="lname" length="65535" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="65535" />
+        </property>
+        <property name="image" type="string">
+            <column name="image" length="65535" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="65535" />
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="created_on" length="19" />
+        </property>
+        <property name="fcmToken" type="string">
+            <column name="fcm_token" length="65535" />
+        </property>
+        <set name="wishlists" table="wishlist" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Wishlist" />
+        </set>
+        <set name="shippingAddresses" table="customer_has_address" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.ShippingAddress">
+                <column name="shipping_address_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="invoices" table="invoice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Invoice" />
+        </set>
+        <set name="productReviews" table="product_review" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.ProductReview" />
+        </set>
+        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Cart" />
+        </set>
+    </class>
+</hibernate-mapping>

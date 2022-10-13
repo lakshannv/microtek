@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2021 4:50:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.Invoice" table="invoice" catalog="microtek" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="city" class="hibernate.City" fetch="select">
+            <column name="city_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="customer" class="hibernate.Customer" fetch="select">
+            <column name="customer_id" not-null="true" />
+        </many-to-one>
+        <property name="deliveryMethod" type="java.lang.Byte">
+            <column name="delivery_method" />
+        </property>
+        <property name="delFee" type="java.lang.Double">
+            <column name="del_fee" precision="22" scale="0" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="65535" />
+        </property>
+        <property name="billingAddress" type="string">
+            <column name="billing_address" length="65535" />
+        </property>
+        <property name="billingCityId" type="java.lang.Integer">
+            <column name="billing_city_id" />
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="created_on" length="19" />
+        </property>
+        <property name="lastChangedOn" type="timestamp">
+            <column name="last_changed_on" length="19" />
+        </property>
+        <property name="orderStatus" type="java.lang.Byte">
+            <column name="order_status" />
+        </property>
+        <set name="invoiceItems" table="invoice_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="invoice_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.InvoiceItem" />
+        </set>
+    </class>
+</hibernate-mapping>

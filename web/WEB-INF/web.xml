@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>SuspendCheckFilter</filter-name>
+        <filter-class>model.SuspendCheckFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SuspendCheckFilter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/signup.jsp</url-pattern>
+        <url-pattern>/search.jsp</url-pattern>
+        <url-pattern>/purchase_history.jsp</url-pattern>
+        <url-pattern>/product.jsp</url-pattern>
+        <url-pattern>/pending_orders.jsp</url-pattern>
+        <url-pattern>/order.jsp</url-pattern>
+        <url-pattern>/login.jsp</url-pattern>
+        <url-pattern>/checkout.jsp</url-pattern>
+        <url-pattern>/account.jsp</url-pattern>
+    </filter-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+</web-app>

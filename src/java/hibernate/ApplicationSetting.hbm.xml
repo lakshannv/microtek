@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2021 4:50:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.ApplicationSetting" table="application_setting" catalog="microtek" optimistic-lock="version">
+        <id name="name" type="string">
+            <column name="name" length="65535" />
+            <generator class="assigned" />
+        </id>
+        <property name="value" type="string">
+            <column name="value" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

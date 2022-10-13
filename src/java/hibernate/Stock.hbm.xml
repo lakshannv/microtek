@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 10, 2021 4:50:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.Stock" table="stock" catalog="microtek" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="product" class="hibernate.Product" fetch="select">
+            <column name="product_id" not-null="true" />
+        </many-to-one>
+        <property name="buyingPrice" type="java.lang.Double">
+            <column name="buying_price" precision="22" scale="0" />
+        </property>
+        <property name="sellingPrice" type="java.lang.Double">
+            <column name="selling_price" precision="22" scale="0" />
+        </property>
+        <property name="qty" type="java.lang.Integer">
+            <column name="qty" />
+        </property>
+        <property name="discount" type="java.lang.Double">
+            <column name="discount" precision="22" scale="0" />
+        </property>
+        <property name="warranty" type="string">
+            <column name="warranty" length="65535" />
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="created_on" length="19" />
+        </property>
+        <property name="active" type="java.lang.Byte">
+            <column name="active" />
+        </property>
+        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="stock_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.Cart" />
+        </set>
+        <set name="invoiceItems" table="invoice_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="stock_id" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.InvoiceItem" />
+        </set>
+    </class>
+</hibernate-mapping>
