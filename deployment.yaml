@@ -33,3 +33,18 @@ spec:
       nodePort: 32500
       targetPort: 8080
   type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microtek-payara-server
+spec:
+  selector:
+    app: microtek
+  ports:
+    - protocol: "TCP"
+      port: 8283
+      nodePort: 32501
+      targetPort: 4848
+  type: NodePort
