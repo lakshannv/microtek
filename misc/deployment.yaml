@@ -16,8 +16,19 @@ spec:
         - name: microtek
           image: lakshannv/microtek:1.0.0
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsGroup: 0
+            runAsUser: 0
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /opt/payara/appserver/glassfish/domains/domain1/applications/microtek/assets/img
+      volumes:
+        - name: data
+          hostPath:
+            path: /shared/microtek
+            type: DirectoryOrCreate
 
 ---
 apiVersion: v1
