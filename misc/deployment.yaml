@@ -13,6 +13,11 @@ spec:
         app: microtek
     spec:
       containers:
+        - name: microtek-db
+          image: lakshannv/microtek-db:demo
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3306
         - name: microtek
           image: lakshannv/microtek:1.0.0
           imagePullPolicy: IfNotPresent
@@ -58,4 +63,19 @@ spec:
       port: 8283
       nodePort: 32501
       targetPort: 4848
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microtek-db
+spec:
+  selector:
+    app: microtek
+  ports:
+    - protocol: "TCP"
+      port: 8280
+      nodePort: 32450
+      targetPort: 3306
   type: NodePort
